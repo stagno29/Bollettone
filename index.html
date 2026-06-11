@@ -110,9 +110,11 @@
             color: #0B1D3A;
         }
 
-        /* Evidenziazione delicata per le prime posizioni */
-        tr:nth-child(1) td { background-color: rgba(32, 212, 137, 0.1); }
-        tr:nth-child(2) td { background-color: rgba(32, 212, 137, 0.05); }
+                /* Evidenziazione delicata per le prime 3 posizioni */
+        tr:nth-child(1) td { background-color: rgba(32, 212, 137, 0.15); } /* Primo posto */
+        tr:nth-child(2) td { background-color: rgba(32, 212, 137, 0.10); } /* Secondo posto */
+        tr:nth-child(3) td { background-color: rgba(32, 212, 137, 0.05); } /* Terzo posto */
+
 
         .footer {
             text-align: center;
