@@ -125,14 +125,27 @@
             border-top: 1px solid #f0f0f0;
         }
 
-        /* Ottimizzazione per schermi molto piccoli */
+          /* Ottimizzazione per schermi molto piccoli */
         @media (max-width: 480px) {
-            .header-content { flex-direction: column; text-align: left; gap: 12px; }
-            .logo { width: 50px; }
-            .header h1 { font-size: 18px; }
-            .header h2 { font-size: 14px; }
-            th, td { font-size: 13px; padding: 12px 5px; }
+            .header-content { 
+                gap: 12px; /* Riduce leggermente lo spazio tra logo e testo */
+            }
+            .logo { 
+                width: 60px; /* Rimpicciolisce un po' il logo per far spazio ai testi */
+            }
+            .header h1 { 
+                font-size: 18px; /* Adatta il titolo per non farlo andare a capo */
+                letter-spacing: 0;
+            }
+            .header h2 { 
+                font-size: 15px; 
+            }
+            th, td { 
+                font-size: 14px; 
+                padding: 12px 5px; 
+            }
         }
+
     </style>
 </head>
 <body>
