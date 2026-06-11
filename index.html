@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classifica Bollettone FIFA 2026</title>
     <style>
-        /* Impostazioni generali per dispositivi mobile */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #f0f2f5;
@@ -15,7 +14,7 @@
         }
         
         .container {
-            max-width: 600px; /* Perfetto per smartphone e centrato su PC */
+            max-width: 600px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
@@ -24,7 +23,7 @@
         }
 
         .header {
-            background-color: #006400; /* Verde scuro calcistico */
+            background-color: #006400;
             color: white;
             text-align: center;
             padding: 20px 10px;
@@ -43,42 +42,47 @@
             opacity: 0.9;
         }
 
-        /* Stile della tabella */
         .table-wrapper {
-            overflow-x: auto; /* Permette lo scroll orizzontale se ci sono troppe colonne */
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
         }
 
+        /* Centra tutte le intestazioni della prima riga (inclusa la seconda colonna) */
         th {
             background-color: #f8f9fa;
             color: #555;
             padding: 12px 15px;
             font-size: 14px;
             border-bottom: 2px solid #ddd;
+            text-align: center;
         }
 
+        /* Centra tutte le celle delle righe successive di default */
         td {
             padding: 12px 15px;
             border-bottom: 1px solid #eee;
             font-size: 15px;
+            text-align: center;
         }
 
-        /* Colora le prime tre posizioni per dare enfasi */
-        tr:nth-child(1) td { font-weight: bold; background-color: #fff9e6; } /* Oro */
-        tr:nth-child(2) td { font-weight: bold; background-color: #f2f2f2; } /* Argento */
-        tr:nth-child(3) td { font-weight: bold; background-color: #fcece0; } /* Bronzo */
+        /* ECCEZIONE: Allinea a sinistra solo le celle dati della seconda colonna */
+        td:nth-child(2) {
+            text-align: left;
+        }
 
-        /* Effetto zebra per le altre righe */
+        /* Evidenziazione podio */
+        tr:nth-child(1) td { font-weight: bold; background-color: #fff9e6; }
+        tr:nth-child(2) td { font-weight: bold; background-color: #f2f2f2; }
+        tr:nth-child(3) td { font-weight: bold; background-color: #fcece0; }
+
         tr:nth-child(even):not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)) {
             background-color: #fafafa;
         }
 
-        /* Footer per timestamp aggiornamento */
         .footer {
             text-align: center;
             padding: 15px;
@@ -92,17 +96,15 @@
     <div class="container">
         <div class="header">
             <h1>Bollettone FIFA 2026</h1>
-            <p>Classifica Generale</p>
+            <p>Classifica Generale Pronostici</p>
         </div>
 
         <div class="table-wrapper">
             <table id="classifica">
                 <thead id="table-head">
-                    <!-- Le intestazioni verranno generate qui dal JavaScript -->
-                </thead>
+                    </thead>
                 <tbody id="table-body">
-                    <!-- I dati verranno inseriti qui dal JavaScript -->
-                    <tr><td colspan="3" style="text-align:center;">Caricamento classifica in corso...</td></tr>
+                    <tr><td colspan="4" style="text-align:center;">Caricamento classifica in corso...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -113,19 +115,16 @@
     </div>
 
     <script>
-        // SOSTITUISCI QUESTA STRINGA CON IL TUO LINK CSV PUBBLICO
+        // REINSERISCI QUI IL TUO LINK CSV PUBBLICO
         const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCYfuZRkMNP2cv05ZUiCLnVNhzgJ18knMZ5bK4ffNIzMqH-inqJEtmIBY_tDYX1OjDiMNfV_KXiXFS/pub?gid=1925457345&single=true&output=csv';
 
         fetch(csvUrl)
             .then(response => response.text())
             .then(data => {
-                // Separa le righe del file CSV
                 const righe = data.split('\n').filter(row => row.trim() !== '');
                 
-                // La prima riga contiene le intestazioni (es. Posizione, Nome, Punti)
                 const intestazioni = righe[0].split(',');
                 
-                // Genera dinamicamente l'intestazione della tabella
                 let theadHtml = '<tr>';
                 intestazioni.forEach(titolo => {
                     theadHtml += `<th>${titolo.replace(/"/g, '')}</th>`;
@@ -133,7 +132,6 @@
                 theadHtml += '</tr>';
                 document.getElementById('table-head').innerHTML = theadHtml;
 
-                // Genera il corpo della tabella
                 let tbodyHtml = '';
                 for (let i = 1; i < righe.length; i++) {
                     const colonne = righe[i].split(',');
@@ -148,10 +146,9 @@
             })
             .catch(error => {
                 console.error('Errore nel caricamento dei dati:', error);
-                document.getElementById('table-body').innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Impossibile caricare la classifica. Riprova più tardi.</td></tr>';
+                document.getElementById('table-body').innerHTML = '<tr><td colspan="4" style="text-align:center; color:red;">Impossibile caricare la classifica. Riprova più tardi.</td></tr>';
             });
     </script>
 
 </body>
 </html>
-
