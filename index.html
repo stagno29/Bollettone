@@ -131,7 +131,7 @@
                     theadHtml += `<th>${titolo.replace(/"/g, '')}</th>`;
                 });
                 theadHtml += '</tr>';
-                document.getElementById('table-head').innerHTML = taking_head;
+                document.getElementById('table-head').innerHTML = theadHtml;
 
                 // Genera il corpo della tabella
                 let tbodyHtml = '';
