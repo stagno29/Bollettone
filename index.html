@@ -109,7 +109,15 @@
             text-align: left;
             color: #0B1D3A;
         }
+         /* ECCEZIONE: Colonna Totale in grassetto (cambia il 3 con il numero della tua colonna) */
+        td:nth-child(3) {
+            font-weight: 800;
+            color: #0B1D3A; /* Usa il blu notte del logo per farlo risaltare ancora di più */
+        }
+     
 
+
+     
                 /* Evidenziazione delicata per le prime 3 posizioni */
         tr:nth-child(1) td { background-color: rgba(32, 212, 137, 0.15); } /* Primo posto */
         tr:nth-child(2) td { background-color: rgba(32, 212, 137, 0.10); } /* Secondo posto */
