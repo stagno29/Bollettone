@@ -135,6 +135,7 @@
             border-top: 1px solid #f0f0f0;
         }
 
+                /* Stile del pulsante identico alla pagina regolamento */
         .btn-nav {
             display: inline-block;
             background-color: #0B1D3A;
@@ -145,12 +146,19 @@
             font-weight: 600;
             font-size: 15px;
             transition: background-color 0.2s;
-            margin-bottom: 10px;
         }
 
         .btn-nav:hover {
             background-color: #1a365d;
         }
+
+        /* Contenitore per spostare il pulsante a destra */
+        .btn-container {
+            text-align: right;
+            padding: 15px 20px;
+            border-top: 1px solid #e0e4e8; /* Linea divisoria opzionale per staccarlo dalla tabella */
+        }
+
 
           /* Ottimizzazione per schermi molto piccoli */
         @media (max-width: 480px) {
@@ -201,12 +209,16 @@
                 </tbody>
             </table>
         </div>
+   
+                      </div>
 
-            <a href="classifica-fasefinale.html" class="btn-nav">← Classifica</a>
-
+        <div class="btn-container">
+            <a href="regolamento.html" class="btn-nav">Regolamento →</a>
+        </div>
         <div class="footer">
             Dati aggiornati in tempo reale
         </div>
+
     </div>
 
     <script>
