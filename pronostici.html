@@ -68,18 +68,23 @@
         }
 
         /* Stile unico e identico per entrambi i pulsanti in alto */
+                /* Stile unico e identico per entrambi i pulsanti in alto */
         .btn-top {
             background-color: #0B1D3A;
             color: white;
             text-decoration: none;
-            padding: 10px 18px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 14px;
             transition: background-color 0.2s;
-            text-align: center;
-            white-space: nowrap; /* Impedisce che il testo vada a capo */
+            width: 190px; /* LARGHEZZA FISSA: li rende identici */
+            height: 42px; /* ALTEZZA FISSA: li rende uguali alle schede delle fasi */
+            display: inline-flex; /* Centra perfettamente il testo */
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
         }
+
 
         .btn-top:hover {
             background-color: #1a365d;
@@ -93,17 +98,23 @@
             gap: 10px;
             flex-wrap: wrap; /* Va a capo su mobile */
         }
-        .tab-btn {
+                .tab-btn {
             background-color: #e2e8f0;
             color: #4a5568;
             border: none;
-            padding: 10px 15px;
+            padding: 0 15px;
+            height: 42px; /* Altezza fissa stabilita */
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            display: inline-flex; /* Centra il testo in altezza */
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
         }
+
         .tab-btn:hover { background-color: #cbd5e1; }
         .tab-btn.active {
             background-color: #20D489;
@@ -194,14 +205,18 @@
             background: white;
         }
 
-        /* OTTIMIZZAZIONE MOBILE */
+                /* OTTIMIZZAZIONE MOBILE */
         @media (max-width: 480px) {
             .header-content { gap: 12px; }
             .logo { width: 70px; }
             .header h1 { font-size: 18px; }
             .header h2 { font-size: 15px; }
-            .tab-btn { flex-grow: 1; text-align: center; padding: 8px 10px; font-size: 13px;}
-            .btn-top { padding: 8px 10px; font-size: 12px; }
+            
+            /* Aggiornamento per i pulsanti sui telefoni */
+            .btn-top { width: 48%; font-size: 12px; height: 38px; }
+            .tab-btn { flex-grow: 1; padding: 0 10px; font-size: 13px; height: 38px; }
+        }
+
 
         }
     </style>
