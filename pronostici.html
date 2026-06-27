@@ -56,9 +56,19 @@
             gap: 15px;
         }
         
-        /* Pulsante verso Classifica */
-        .btn-classifica {
-            align-self: flex-start;
+       
+
+                /* Contenitore per i due pulsanti in alto (li spinge ai lati opposti) */
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+        }
+
+        /* Stile unico e identico per entrambi i pulsanti in alto */
+        .btn-top {
             background-color: #0B1D3A;
             color: white;
             text-decoration: none;
@@ -67,8 +77,15 @@
             font-weight: 600;
             font-size: 14px;
             transition: background-color 0.2s;
+            text-align: center;
+            white-space: nowrap; /* Impedisce che il testo vada a capo */
         }
-        .btn-classifica:hover { background-color: #1a365d; }
+
+        .btn-top:hover {
+            background-color: #1a365d;
+        }
+
+
 
         /* Bottoni delle fasi (Tabs) */
         .tabs-container {
@@ -163,25 +180,7 @@
         thead tr:nth-child(1) th:first-child { z-index: 15; left: 0; border-right: 2px solid #0B1D3A; }
         thead tr:nth-child(2) th:first-child { z-index: 15; left: 0; border-right: 2px solid #1aa86d; }
 
-        /* PULSANTE REGOLAMENTO A DESTRA IN BASSO */
-        .btn-container {
-            text-align: right;
-            padding: 20px;
-            border-top: 1px solid #e0e4e8;
-            background-color: white;
-        }
-        .btn-nav {
-            display: inline-block;
-            background-color: #0B1D3A;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: background-color 0.2s;
-        }
-        .btn-nav:hover { background-color: #1a365d; }
+        
 
         .footer {
             text-align: center;
@@ -202,6 +201,8 @@
             .header h1 { font-size: 18px; }
             .header h2 { font-size: 15px; }
             .tab-btn { flex-grow: 1; text-align: center; padding: 8px 10px; font-size: 13px;}
+            .btn-top { padding: 8px 10px; font-size: 12px; }
+
         }
     </style>
 </head>
@@ -217,11 +218,14 @@
         </div>
     </div>
 
-    <div class="container">
-        
-        <div class="nav-area">
-            <a href="classifica-fasefinale.html" class="btn-classifica">Classifica</a>
-            
+            <div class="nav-area">
+
+            <div class="top-buttons">
+                <a
+href="classifica-fasefinale.html" class="btn-top">Classifica</a>
+                <a href="regolamento-2.html" class="btn-top">Regolamento</a>
+            </div>
+
             <div class="tabs-container">
                 <button class="tab-btn" onclick="cambiaFase('sedicesimi')" id="btn-sedicesimi">Sedicesimi</button>
                 <button class="tab-btn" onclick="cambiaFase('ottavi')" id="btn-ottavi">Ottavi</button>
@@ -294,10 +298,6 @@
             </div>
         </div>
 
-
-        <div class="btn-container">
-            <a href="regolamento-2.html" class="btn-nav">Regolamento</a>
-        </div>
 
         <div class="footer">
             Dati aggiornati in tempo reale
