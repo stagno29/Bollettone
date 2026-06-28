@@ -171,16 +171,19 @@
             font-weight: 600;
         }
         
+       
         /* 2. Seconda riga (Risultati reali) bloccata sotto la prima */
-        thead tr:nth-child(2) th {
-            position: sticky;
-            top: 45px; /* Deve corrispondere all'altezza della riga 1 */
-            z-index: 10;
-            background-color: #20D489;
-            color: #0B1D3A;
-            font-size: 14px;
-            font-weight: 600;
-        }
+         thead tr:nth-child(2) th {
+             position: sticky;
+             top: 45px;
+             z-index: 10;
+             background-color: #20D489;
+             color: #0B1D3A;
+             font-size: 12px;   /* ALLINEATO: imposta lo stesso valore delle altre celle */
+             font-weight: 600;  /* Mantiene una buona leggibilità senza eccedere */
+             padding: 6px 7px;  /* ALLINEATO: uguale alle altre celle */
+}
+
 
         /* 3. Prima colonna (Nomi Partecipanti) bloccata a sinistra */
         tbody th, tbody td:first-child {
