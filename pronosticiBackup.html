@@ -265,44 +265,14 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
             </div>
         </div>
 
-        <div id="sedicesimi" class="phase-content">
-            <div class="table-scroll-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Giocatore</th>
-                            <th>ITA-FRA</th>
-                            <th>GER-ESP</th>
-                            <th>BRA-ARG</th>
-                            <th>ENG-NED</th>
-                            <th>POR-BEL</th>
-                        </tr>
-                        <tr>
-                            <th>Risultati Reali</th>
-                            <th>2-1</th>
-                            <th>0-0</th>
-                            <th>3-2</th>
-                            <th>1-0</th>
-                            <th>-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Salvatore poloroco</td><td>1-1</td><td>2-0</td><td>1-2</td><td>0-0</td><td>2-1</td></tr>
-                        <tr><td>Marco</td><td>2-1</td><td>0-0</td><td>1-0</td><td>1-1</td><td>3-0</td></tr>
-                        <tr><td>Luca</td><td>0-2</td><td>1-1</td><td>2-2</td><td>1-0</td><td>0-0</td></tr>
-                        <tr><td>Giovanni</td><td>1-0</td><td>2-1</td><td>3-1</td><td>0-0</td><td>2-2</td></tr>
-                        <tr><td>Anna</td><td>1-1</td><td>0-0</td><td>2-1</td><td>1-0</td><td>1-1</td></tr>
-                        <tr><td>Matteo</td><td>2-0</td><td>1-1</td><td>0-0</td><td>2-1</td><td>3-1</td></tr>
-                        <tr><td>Elena</td><td>0-0</td><td>2-2</td><td>1-0</td><td>0-1</td><td>0-0</td></tr>
-                        <tr><td>Francesco</td><td>1-2</td><td>0-1</td><td>2-1</td><td>1-1</td><td>2-0</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-           <div class="table-note">
-                * Squadra indicata con l'invio dei pronostici del Bollettone FIFA 2026 - Fase a gironi.
+                        <div id="sedicesimi" class="phase-content">
+            <div style="padding: 40px; text-align: center; color: #888;">
+                Caricamento pronostici in corso...
             </div>
         </div>
+
+
+           
 
                 <div id="ottavi" class="phase-content">
             <div style="padding: 40px; text-align: center; color: #888;">
@@ -339,24 +309,85 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
         </div>
     </div>
 
-    <script>
-        // === IMPOSTA QUI LA FASE DI DEFAULT ===
-        // Scrivi 'sedicesimi', 'ottavi', 'quarti', 'semifinali' o 'finali'
-        const faseDiDefault = 'sedicesimi'; 
+        <script>
+    // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
+    const phaseLinks = {
+        'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
+        'ottavi': '', // Lascia vuoto se non c'è ancora
+        'quarti': '',
+        'semifinali': '',
+        'finali': ''
+    };
 
-        function cambiaFase(nomeFase) {
-            // 1. Nasconde tutte le sezioni
-            document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
-            // 2. Rimuove l'evidenziazione da tutti i bottoni
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    const faseDiDefault = 'sedicesimi';
+
+    // Funzione per caricare i dati
+    async function loadPhaseData(phaseName) {
+        const container = document.getElementById(phaseName);
+        const url = phaseLinks[phaseName];
+
+        if (!url) return;
+
+        try {
+            const response = await fetch(url);
+            const csvText = await response.text();
             
-            // 3. Mostra la sezione scelta e illumina il bottone
-            document.getElementById(nomeFase).classList.add('active');
-            document.getElementById('btn-' + nomeFase).classList.add('active');
-        }
+            // Pulisce le righe vuote
+            const rows = csvText.split('\n').filter(row => row.trim() !== '');
+            
+            let html = '<div class="table-scroll-wrapper"><table><thead>';
+            
+            // Riga 1: Partite (Header)
+            html += '<tr>';
+            rows[0].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
+            html += '</tr>';
 
-        // Avvia la pagina mostrando la fase di default scelta sopra
-        cambiaFase(faseDiDefault);
+            // Riga 2: Risultati Reali
+            html += '<tr>';
+            rows[1].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
+            html += '</tr>';
+
+            html += '</thead><tbody>';
+
+            // Righe partecipanti (dalla 3 in poi)
+            for (let i = 2; i < rows.length; i++) {
+                html += '<tr>';
+                rows[i].split(',').forEach(cell => html += `<td>${cell.replace(/"/g, '').trim()}</td>`);
+                html += '</tr>';
+            }
+
+            html += '</tbody></table></div>';
+
+            // INSERISCE LA NOTA IN AUTOMATICO SOLO NEI SEDICESIMI
+            if (phaseName === 'sedicesimi') {
+                html += `<div class="table-note">* Squadra indicata con l'invio dei pronostici del Bollettone FIFA 2026 - Fase a gironi</div>`;
+            }
+
+            container.innerHTML = html;
+        } catch (e) {
+            container.innerHTML = '<div style="padding:40px; text-align:center; color:#e74c3c;">Errore nel caricamento dati. Riprova.</div>';
+        }
+    }
+
+    // Funzione per cambiare scheda
+    function cambiaFase(nomeFase) {
+        document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        const target = document.getElementById(nomeFase);
+        target.classList.add('active');
+        document.getElementById('btn-' + nomeFase).classList.add('active');
+
+        // Se il contenitore ha la scritta "Caricamento..." o "non ancora disponibili", scarica i dati
+        if ((target.innerHTML.includes('non ancora disponibili') || target.innerHTML.includes('Caricamento')) && phaseLinks[nomeFase]) {
+            target.innerHTML = '<div style="padding:40px; text-align:center; color:#888;">Caricamento pronostici in corso...</div>';
+            loadPhaseData(nomeFase);
+        }
+    }
+
+    // Inizializza la pagina al primo avvio
+    cambiaFase(faseDiDefault);
     </script>
+
 </body>
 </html>
