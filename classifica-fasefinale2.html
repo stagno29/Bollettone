@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifica - Bollettone FIFA 2026</title>
+    
+    <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 700px; /* Mantengo la tua larghezza di 700px */
+            margin: 0 auto 30px auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #0B1D3A;
+            border-bottom: 6px solid #20D489;
+            padding: 25px 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 85px;
+            height: auto;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .titles {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .header h2 {
+            color: #20D489;
+            margin: 5px 0 0 0;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        /* AREA PULSANTI NAVIGAZIONE (Uguale alle altre pagine) */
+        .nav-area {
+            padding: 20px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .btn-top {
+            background-color: #0B1D3A;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            width: 48%; /* Si dividono lo spazio in 2 */
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .btn-top:hover {
+            background-color: #1a365d;
+        }
+
+        /* PULSANTI SCELTA GRUPPO (Fasi / Bonus) */
+        .group-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 20px 0 20px; /* Spazio solo sopra, per avvicinarli alla tabella */
+        }
+
+        .btn-group {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-grow: 1;
+            max-width: 200px;
+        }
+
+        .btn-group:hover {
+            background-color: #cbd5e1;
+        }
+
+        .btn-group.active {
+            background-color: #20D489;
+            color: #0B1D3A;
+        }
+
+        /* Stile Tabella Minimale */
+        .table-wrapper {
+            overflow-x: auto;
+            padding: 15px 20px 30px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            color: #0B1D3A;
+            padding: 16px 10px;
+            font-size: 15px;
+            font-weight: 800;
+            border-bottom: 2px solid #0B1D3A;
+            text-align: center;
+        }
+
+        td {
+            padding: 16px 10px;
+            border-bottom: 1px solid #e0e4e8;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* ECCEZIONE: Seconda colonna allineata a sinistra */
+        td:nth-child(2) {
+            text-align: left;
+            color: #0B1D3A;
+        }
+         /* ECCEZIONE: Colonna Totale in grassetto */
+        td:nth-child(3) {
+            font-weight: 800;
+            color: #0B1D3A; 
+        }
+     
+        /* Evidenziazione delicata per le prime 3 posizioni */
+        tr:nth-child(1) td { background-color: rgba(32, 212, 137, 0.15); } 
+        tr:nth-child(2) td { background-color: rgba(32, 212, 137, 0.10); } 
+        tr:nth-child(3) td { background-color: rgba(32, 212, 137, 0.05); } 
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Ottimizzazione Mobile */
+        @media (max-width: 480px) {
+            .header { padding: 10px 15px; }
+            .header-content { gap: 12px; }
+            .logo { width: 70px; }
+            .header h1 { font-size: 18px; letter-spacing: 0; }
+            .header h2 { font-size: 15px; }
+            
+            /* Bottoni nav sopra */
+            .btn-top { font-size: 12px; height: 30px; }
+            
+            /* Bottoni gruppi tabella */
+            .btn-group { font-size: 12px; padding: 8px 10px; }
+            
+            th, td { font-size: 13px; padding: 12px 7px; }
+        }
+
+        /* Classe di utilità per nascondere le colonne non attive */
+        .hidden-col {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header a banda piena -->
+    <div class="header">
+        <div class="header-content">
+            <img src="logo-bollettone-fifa26.png" alt="Logo Bollettone FIFA 2026" class="logo">
+            <div class="titles">
+                <h1>BOLLETTONE FIFA 2026</h1>
+                <h2>Classifica Fase finale</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenitore Principale -->
+    <div class="container">
+        
+        <!-- Navigazione (copia di Pronostici/Regolamento) -->
+        <div class="nav-area">
+            <div class="top-buttons">
+                <a href="pronostici.html" class="btn-top">Pronostici</a>
+                <a href="regolamento.html" class="btn-top">Regolamento</a>
+            </div>
+        </div>
+
+        <!-- Pulsanti Scelta Gruppo Colonne -->
+        <div class="group-nav">
+            <button id="btn-fase" class="btn-group active" onclick="cambiaGruppo('fase')">Punti per fase</button>
+            <button id="btn-bonus" class="btn-group" onclick="cambiaGruppo('bonus')">Punti bonus</button>
+        </div>
+
+        <!-- Tabella -->
+        <div class="table-wrapper">
+            <table id="classifica">
+                <thead id="table-head">
+                    <!-- Intestazioni generate da JS -->
+                </thead>
+                <tbody id="table-body">
+                    <tr><td colspan="4" style="text-align:center; padding: 40px;">Caricamento classifica in corso...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Dati aggiornati in tempo reale
+        </div>
+
+    </div>
+
+    <script>
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCYfuZRkMNP2cv05ZUiCLnVNhzgJ18knMZ5bK4ffNIzMqH-inqJEtmIBY_tDYX1OjDiMNfV_KXiXFS/pub?gid=1925457345&single=true&output=csv';
+
+        // Funzione per determinare la classe della colonna in base all'indice
+        function getColClass(index) {
+            if (index >= 0 && index <= 2) return 'col-fissa';   // Col 1, 2, 3 (sempre visibili)
+            if (index >= 3 && index <= 6) return 'col-bonus';   // Col 4, 5, 6, 7 (Gruppo Bonus)
+            if (index >= 7) return 'col-fase';                  // Col 8, 9, 10, 11, 12 (Gruppo Fase)
+            return '';
+        }
+
+        fetch(csvUrl)
+            .then(response => response.text())
+            .then(data => {
+                const righe = data.split('\n').filter(row => row.trim() !== '');
+                const intestazioni = righe[0].split(',');
+                
+                // Creazione Intestazioni (thead)
+                let theadHtml = '<tr>';
+                intestazioni.forEach((titolo, index) => {
+                    const classeColonna = getColClass(index);
+                    theadHtml += `<th class="${classeColonna}">${titolo.replace(/"/g, '')}</th>`;
+                });
+                theadHtml += '</tr>';
+                document.getElementById('table-head').innerHTML = theadHtml;
+
+                // Creazione Righe (tbody)
+                let tbodyHtml = '';
+                for (let i = 1; i < righe.length; i++) {
+                    const colonne = righe[i].split(',');
+                    tbodyHtml += '<tr>';
+                    colonne.forEach((cella, index) => {
+                        const classeColonna = getColClass(index);
+                        tbodyHtml += `<td class="${classeColonna}">${cella.replace(/"/g, '')}</td>`;
+                    });
+                    tbodyHtml += '</tr>';
+                }
+                
+                document.getElementById('table-body').innerHTML = tbodyHtml;
+
+                // Alla fine del caricamento, imposta di default la vista su "fase"
+                cambiaGruppo('fase');
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+                document.getElementById('table-body').innerHTML = '<tr><td colspan="4" style="text-align:center; color:#e74c3c;">Impossibile caricare la classifica.</td></tr>';
+            });
+
+        // Funzione per mostrare/nascondere le colonne
+        function cambiaGruppo(gruppo) {
+            // Aggiorna lo stile dei bottoni
+            document.getElementById('btn-fase').classList.remove('active');
+            document.getElementById('btn-bonus').classList.remove('active');
+            document.getElementById('btn-' + gruppo).classList.add('active');
+
+            // Prende tutte le colonne di tipo bonus e fase (sia thead che tbody)
+            const colBonus = document.querySelectorAll('.col-bonus');
+            const colFase = document.querySelectorAll('.col-fase');
+
+            if (gruppo === 'fase') {
+                colBonus.forEach(el => el.classList.add('hidden-col'));
+                colFase.forEach(el => el.classList.remove('hidden-col'));
+            } else if (gruppo === 'bonus') {
+                colFase.forEach(el => el.classList.add('hidden-col'));
+                colBonus.forEach(el => el.classList.remove('hidden-col'));
+            }
+        }
+    </script>
+
+</body>
+</html>
