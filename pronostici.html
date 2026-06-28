@@ -265,25 +265,12 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
             </div>
         </div>
 
-                <div id="sedicesimi" class="phase-content">
-            <div class="table-scroll-wrapper">
-                <table>
-                    <thead id="table-head">
-                        </thead>
-                    <tbody id="table-body">
-                        <tr>
-                            <td colspan="6" style="text-align:center; padding: 40px; color: #888;">
-                                Caricamento pronostici in corso...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="table-note">
-                * Squadra indicata con l'invio dei pronostici del Bollettone FIFA 2026 - Fase a gironi
+                        <div id="sedicesimi" class="phase-content">
+            <div style="padding: 40px; text-align: center; color: #888;">
+                Caricamento pronostici in corso...
             </div>
         </div>
+
 
            
 
@@ -322,7 +309,7 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
         </div>
     </div>
 
-    <script>
+        <script>
     // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
     const phaseLinks = {
         'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
@@ -339,25 +326,25 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
         const container = document.getElementById(phaseName);
         const url = phaseLinks[phaseName];
 
-        // Se non c'è il link, mostra messaggio di attesa
         if (!url) return;
 
         try {
             const response = await fetch(url);
             const csvText = await response.text();
+            
+            // Pulisce le righe vuote
             const rows = csvText.split('\n').filter(row => row.trim() !== '');
             
-            // Crea la tabella HTML
             let html = '<div class="table-scroll-wrapper"><table><thead>';
             
             // Riga 1: Partite (Header)
             html += '<tr>';
-            rows[0].split(',').forEach(cell => html += `<th>${cell.trim()}</th>`);
+            rows[0].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
             html += '</tr>';
 
             // Riga 2: Risultati Reali
             html += '<tr>';
-            rows[1].split(',').forEach(cell => html += `<th>${cell.trim()}</th>`);
+            rows[1].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
             html += '</tr>';
 
             html += '</thead><tbody>';
@@ -365,14 +352,20 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
             // Righe partecipanti (dalla 3 in poi)
             for (let i = 2; i < rows.length; i++) {
                 html += '<tr>';
-                rows[i].split(',').forEach(cell => html += `<td>${cell.trim()}</td>`);
+                rows[i].split(',').forEach(cell => html += `<td>${cell.replace(/"/g, '').trim()}</td>`);
                 html += '</tr>';
             }
 
             html += '</tbody></table></div>';
+
+            // INSERISCE LA NOTA IN AUTOMATICO SOLO NEI SEDICESIMI
+            if (phaseName === 'sedicesimi') {
+                html += `<div class="table-note">* Squadra indicata con l'invio dei pronostici del Bollettone FIFA 2026 - Fase a gironi</div>`;
+            }
+
             container.innerHTML = html;
         } catch (e) {
-            container.innerHTML = '<div style="padding:40px; text-align:center;">Errore nel caricamento dati.</div>';
+            container.innerHTML = '<div style="padding:40px; text-align:center; color:#e74c3c;">Errore nel caricamento dati. Riprova.</div>';
         }
     }
 
@@ -385,16 +378,16 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
         target.classList.add('active');
         document.getElementById('btn-' + nomeFase).classList.add('active');
 
-        // Carica dati se non sono ancora stati caricati (se il div è vuoto)
-        if (target.innerHTML.includes('non ancora disponibili') && phaseLinks[nomeFase]) {
-            target.innerHTML = '<div style="padding:40px; text-align:center;">Caricamento...</div>';
+        // Se il contenitore ha la scritta "Caricamento..." o "non ancora disponibili", scarica i dati
+        if ((target.innerHTML.includes('non ancora disponibili') || target.innerHTML.includes('Caricamento')) && phaseLinks[nomeFase]) {
+            target.innerHTML = '<div style="padding:40px; text-align:center; color:#888;">Caricamento pronostici in corso...</div>';
             loadPhaseData(nomeFase);
         }
     }
 
-    // Inizializza
+    // Inizializza la pagina al primo avvio
     cambiaFase(faseDiDefault);
-</script>
+    </script>
 
 </body>
 </html>
