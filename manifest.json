@@ -1,0 +1,17 @@
+{
+  "name": "Bollettone FIFA 2026",
+  "short_name": "Bollettone",
+  "description": "Classifica e pronostici del Bollettone",
+  "start_url": "pronostici.html",
+  "display": "standalone",
+  "background_color": "#0B1D3A",
+  "theme_color": "#20D489",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo-bollettone-fifa26.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
