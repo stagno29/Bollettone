@@ -340,23 +340,78 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
     </div>
 
     <script>
-        // === IMPOSTA QUI LA FASE DI DEFAULT ===
-        // Scrivi 'sedicesimi', 'ottavi', 'quarti', 'semifinali' o 'finali'
-        const faseDiDefault = 'sedicesimi'; 
+    // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
+    const phaseLinks = {
+        'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
+        'ottavi': '', // Lascia vuoto se non c'è ancora
+        'quarti': '',
+        'semifinali': '',
+        'finali': ''
+    };
 
-        function cambiaFase(nomeFase) {
-            // 1. Nasconde tutte le sezioni
-            document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
-            // 2. Rimuove l'evidenziazione da tutti i bottoni
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    const faseDiDefault = 'sedicesimi';
+
+    // Funzione per caricare i dati
+    async function loadPhaseData(phaseName) {
+        const container = document.getElementById(phaseName);
+        const url = phaseLinks[phaseName];
+
+        // Se non c'è il link, mostra messaggio di attesa
+        if (!url) return;
+
+        try {
+            const response = await fetch(url);
+            const csvText = await response.text();
+            const rows = csvText.split('\n').filter(row => row.trim() !== '');
             
-            // 3. Mostra la sezione scelta e illumina il bottone
-            document.getElementById(nomeFase).classList.add('active');
-            document.getElementById('btn-' + nomeFase).classList.add('active');
-        }
+            // Crea la tabella HTML
+            let html = '<div class="table-scroll-wrapper"><table><thead>';
+            
+            // Riga 1: Partite (Header)
+            html += '<tr>';
+            rows[0].split(',').forEach(cell => html += `<th>${cell.trim()}</th>`);
+            html += '</tr>';
 
-        // Avvia la pagina mostrando la fase di default scelta sopra
-        cambiaFase(faseDiDefault);
-    </script>
+            // Riga 2: Risultati Reali
+            html += '<tr>';
+            rows[1].split(',').forEach(cell => html += `<th>${cell.trim()}</th>`);
+            html += '</tr>';
+
+            html += '</thead><tbody>';
+
+            // Righe partecipanti (dalla 3 in poi)
+            for (let i = 2; i < rows.length; i++) {
+                html += '<tr>';
+                rows[i].split(',').forEach(cell => html += `<td>${cell.trim()}</td>`);
+                html += '</tr>';
+            }
+
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        } catch (e) {
+            container.innerHTML = '<div style="padding:40px; text-align:center;">Errore nel caricamento dati.</div>';
+        }
+    }
+
+    // Funzione per cambiare scheda
+    function cambiaFase(nomeFase) {
+        document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        const target = document.getElementById(nomeFase);
+        target.classList.add('active');
+        document.getElementById('btn-' + nomeFase).classList.add('active');
+
+        // Carica dati se non sono ancora stati caricati (se il div è vuoto)
+        if (target.innerHTML.includes('non ancora disponibili') && phaseLinks[nomeFase]) {
+            target.innerHTML = '<div style="padding:40px; text-align:center;">Caricamento...</div>';
+            loadPhaseData(nomeFase);
+        }
+    }
+
+    // Inizializza
+    cambiaFase(faseDiDefault);
+</script>
+
 </body>
 </html>
