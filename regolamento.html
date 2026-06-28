@@ -54,9 +54,7 @@
         .titles {
             display: flex;
             flex-direction: column;
-        }
-
-                
+        }     
 
         .header h1 {
             color: #ffffff;
@@ -75,6 +73,30 @@
             letter-spacing: -0.5px;
         }
 
+          
+/* Stile unico e identico per entrambi i pulsanti in alto */
+                /* Stile unico e identico per entrambi i pulsanti in alto */
+        .btn-top {
+            background-color: #0B1D3A;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            width: 190px; /* LARGHEZZA FISSA: li rende identici */
+            height: 42px; /* ALTEZZA FISSA: li rende uguali alle schede delle fasi */
+            display: inline-flex; /* Centra perfettamente il testo */
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+
+        .btn-top:hover {
+            background-color: #1a365d;
+        }
+        
         /* Stile specifico per il testo del Regolamento */
         .content-wrapper {
             padding: 30px 20px;
@@ -148,8 +170,8 @@
             .header h2 { font-size: 15px; }
             .content-wrapper h3 { font-size: 18px; }
             .content-wrapper p, .content-wrapper li { font-size: 14px; }
-            .top-buttons { padding: 8px 15px 20px 15px; } /* Spazio ridotto per smartphone */
             .btn-top { width: 48%; font-size: 12px; height: 30px; }
+            .tab-btn { flex-grow: 1; padding: 0 10px; font-size: 13px; height: 30px; }
         }
     </style>
 </head>
@@ -165,6 +187,14 @@
         </div>
     </div>
 
+       <div class="nav-area">
+
+            <div class="top-buttons">
+                <a href="classifica-fasefinale.html" class="btn-top">Classifica</a>
+                <a href="pronostici.html" class="btn-top">Pronostici</a>
+            </div>
+       </div>
+    
     <div class="container">
         <div class="content-wrapper">
             
