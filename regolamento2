@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regolamento - Bollettone FIFA 2026</title>
+    
+    <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 0 0 8px 8px; /* Arrotonda gli angoli in fondo come Pronostici */
+        }
+
+        /* Header identico alla classifica e pronostici */
+        .header {
+            background-color: #0B1D3A;
+            border-bottom: 6px solid #20D489;
+            padding: 25px 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            max-width: 1000px; /* Uniformato a 1000px come Pronostici per allineamento logo */
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 85px;
+            height: auto;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .titles {
+            display: flex;
+            flex-direction: column;
+        }     
+
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .header h2 {
+            color: #20D489;
+            margin: 5px 0 0 0;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        /* AREA PULSANTI SUPERIORI (COPIA CARBONE DA PRONOSTICI) */
+        .nav-area {
+            padding: 20px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .btn-top {
+            background-color: #0B1D3A;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            width: 190px; /* Larghezza fissa identica */
+            height: 42px; /* Altezza fissa identica */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .btn-top:hover {
+            background-color: #1a365d;
+        }
+
+        /* SPAZIATURA E ALLINEAMENTO DEL CONTENUTO */
+        .content-wrapper {
+            padding: 25px 20px; /* Garantsce la stessa distanza dal bordo esterno e dai pulsanti */
+        }
+
+        .content-wrapper h3 {
+            color: #0B1D3A;
+            font-size: 20px;
+            font-weight: 800;
+            margin-top: 25px;
+            border-left: 4px solid #20D489;
+            padding-left: 10px;
+        }
+
+        /* Azzera lo spazio extra solo sopra il primo titolo rispetto alla nav-area */
+        .content-wrapper h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .content-wrapper p, .content-wrapper li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4a5568;
+            font-weight: 400;
+            text-align: justify;
+        }
+
+        .content-wrapper ul, .content-wrapper ol {
+            padding-left: 30px;
+        }
+
+        .content-wrapper li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Ottimizzazione Mobile Completa */
+        @media (max-width: 480px) {
+            .header { padding: 10px 15px; }
+            .header-content { gap: 12px; }
+            .logo { width: 70px; }
+            .header h1 { font-size: 18px; letter-spacing: 0; }
+            .header h2 { font-size: 15px; }
+            
+            /* Pulsanti Mobile a 30px di altezza e proporzionati */
+            .btn-top { width: 48%; font-size: 12px; height: 30px; }
+            
+            .content-wrapper h3 { font-size: 18px; }
+            .content-wrapper p, .content-wrapper li { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-content">
+            <img src="logo-bollettone-fifa26.png" alt="Logo Bollettone" class="logo">
+            <div class="titles">
+                <h1>BOLLETTONE FIFA 2026</h1>
+                <h2>Regolamento Fase finale</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="nav-area">
+            <div class="top-buttons">
+                <a href="classifica-fasefinale.html" class="btn-top">Classifica</a>
+                <a href="pronostici.html" class="btn-top">Pronostici</a>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <h3>1. Quota e montepremi</h3>
+            <p>La quota di partecipazione è pari a 5 € ed è destinata interamente al montepremi. <br>
+Il montepremi verrà suddiviso tra il primo, il secondo e il terzo in classifica alla fine del torneo. L'importo dei singoli premi verrà stabilito successivamente in base al numero dei partecipanti. <br>
+La quota potrà essere pagata entro l'inizio del secondo sedicesimo di finale, lunedì 29 giugno alle 19.
+            </p>
+
+            <h3>2. Invio dei pronostici</h3>
+            <p>Si gioca indicando il proprio pronostico sul risultato esatto al 90' delle partite dai sedicesimi di finale fino alla finalissima.<br>
+Per ogni fase (sedicesimi, ottavi, ecc…) verrà pubblicato sul canale WhatsApp del Bollettone Fifa 2026 il link al modulo da compilare per l'invio dei pronostici.<br>
+I pronostici dovranno essere inviati entro la data e ora specificate sul canale WhatsApp e sul modulo stesso al fine di permettere la pubblicazione dei pronostici prima dell'inizio della prima partita della fase.<br>
+In caso di mancato o tardivo invio dei pronostici non verranno assegnati punti per quella fase.
+            </p>
+
+            <h3>3. Assegnazione dei punti</h3>
+            <p>I punti base verranno assegnati in base alle regole seguenti:</p>
+
+            <ul>
+                <li><strong>5 punti:</strong> si indovina il risultato esatto;</li>
+                <li><strong>3 punti:</strong> si indovina la squadra vincente e la differenza reti;</li>
+                <li><strong>1 punto:</strong> si indovina solo la squadra vincente;</li>
+                <li><strong>4 punti:</strong> si indovina il pareggio ma non il risultato esatto;</li>
+                <li>se in una partita si affrontano due squadre tra cui c'è una differenza di almeno 10 posizioni nell'ultimo ranking FIFA ufficiale (11 giugno 2026) viene attribuito <strong>1 punto</strong> extra se si indovina il pareggio o <strong>2 punti</strong> extra se si indovina la vittoria della squadra con il ranking più basso.</li>
+            </ul>
+
+            <p>Oltre ai punti base verranno assegnati anche i seguenti punti bonus:</p>
+            <ul> 
+                <li><strong>Bonus Goleada:</strong> 1 punto bonus se viene pronosticata una goleada e si indovina la squadra vincente. La goleada si verifica quando una partita finisce con una differenza reti maggiore o uguale a 3;</li>
+                <li><strong>Bonus Vincitore finale:</strong> Viene assegnato un bonus di 5 punti a chi indovina la squadra vincitrice della coppa del mondo con il pronostico inviato all’inizio del Bollettone FIFA 2026 - Fase a gironi. Chi non ha partecipato al Bollettone FIFA 2026 - Fase a gironi o ha scelto una squadra eliminata durante la fase a gironi o vuole semplicemente modificare la squadra indicata in precedenza potrà indicare il pronostico sulla squadra vincitrice finale nel modulo relativo alla fase delle semifinali. In questi casi in caso di pronostico corretto il bonus assegnato sarà di soli 3 punti.</li>
+            </ul>            
+            
+            <h3>4. Classifica</h3>
+            <p>La classifica generale verrà aggiornata partita dopo partita e sarà sempre visionabile tramite il relativo link pubblicato sul canale WhatsApp.<br>
+I partecipanti vengono inseriti in classifica in ordine decrescente di punteggio totale.<br>
+In caso di pari punteggio tra due o più partecipanti, verranno usati i seguenti criteri di ordinamento:
+ordine decrescente di numero di risultati esatti indovinati;
+ordine decrescente di totale bonus goleada.<br>
+In caso di ulteriore pareggio verrà usata la regola del Golden Goal. Nel modulo relativo alla finale ogni partecipante deve indicare un minuto tra il 1’ e il 120’ in cui crede che verrà segnato il primo gol della partita. I partecipanti a pari punti verranno quindi ordinati in base a chi si è avvicinato maggiormente al minuto reale. Il gol segnato durante i minuti di recupero viene considerato come segnato nell’ultimo minuto del tempo regolamentare. In caso di partita finita sullo 0-0 anche dopo i tempi supplementari, il primo rigore segnato verrà considerato como primo goal. In questo caso il minuto reale verrà convenzionalmente indicato come il 121’.<br>
+In caso di ulteriore pareggio, il montepremi complessivo spettante alle posizioni occupate dai concorrenti a pari merito sarà ripartito in misura eguale.
+            </p>
+        </div>
+
+        <div class="footer">
+            Bollettone FIFA 2026
+        </div>
+    </div>
+
+</body>
+</html>
