@@ -115,32 +115,31 @@
         /* PULSANTI SCELTA GRUPPO (Fasi / Bonus) */
         .group-nav {
             display: flex;
-            justify-content: center;
             gap: 10px;
+            flex-wrap: wrap; /* Va a capo su mobile */
         }
-
-        .btn-group {
+           .btn-group {
             background-color: #e2e8f0;
             color: #4a5568;
             border: none;
-            padding: 10px 20px;
+            padding: 0 15px;
+            height: 42px; /* Altezza fissa stabilita */
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-            flex-grow: 1;
-            max-width: 200px;
+            display: inline-flex; /* Centra il testo in altezza */
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
         }
 
-        .btn-group:hover {
-            background-color: #cbd5e1;
-        }
-
+        .btn-group:hover { background-color: #cbd5e1; }
         .btn-group.active {
             background-color: #20D489;
             color: #0B1D3A;
+            box-shadow: 0 2px 4px rgba(32, 212, 137, 0.3);
         }
 
         /* Stile Tabella Minimale */
