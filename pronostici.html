@@ -6,9 +6,8 @@
     <title>Pronostici - Bollettone FIFA 2026</title>
     
     <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B1D3A"> 
-
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0B1D3A"> 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,14 +23,13 @@
         }
         
         .container {
-            max-width: 800px; /* erA 1000px Più largo per ospitare tabelle grandi */
+            max-width: 800px;
             margin: 0 auto 30px auto;
             background: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border-radius: 0 0 8px 8px;
         }
 
-        /* HEADER IDENTICO ALLE ALTRE PAGINE */
         .header {
             background-color: #0B1D3A;
             border-bottom: 6px solid #20D489;
@@ -49,7 +47,6 @@
         .header h1 { color: #ffffff; margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1; }
         .header h2 { color: #20D489; margin: 5px 0 0 0; font-size: 22px; font-weight: 600; }
 
-        /* AREA PULSANTI SUPERIORI E MENU FASI */
         .nav-area {
             padding: 20px;
             background-color: #f8fafc;
@@ -59,9 +56,6 @@
             gap: 15px;
         }
         
-       
-
-                /* Contenitore per i due pulsanti in alto (li spinge ai lati opposti) */
         .top-buttons {
             display: flex;
             justify-content: space-between;
@@ -70,8 +64,6 @@
             gap: 10px;
         }
 
-        /* Stile unico e identico per entrambi i pulsanti in alto */
-                /* Stile unico e identico per entrambi i pulsanti in alto */
         .btn-top {
             background-color: #0B1D3A;
             color: white;
@@ -80,39 +72,36 @@
             font-weight: 600;
             font-size: 14px;
             transition: background-color 0.2s;
-            width: 190px; /* LARGHEZZA FISSA: li rende identici */
-            height: 42px; /* ALTEZZA FISSA: li rende uguali alle schede delle fasi */
-            display: inline-flex; /* Centra perfettamente il testo */
+            width: 190px;
+            height: 42px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
         }
 
-
         .btn-top:hover {
             background-color: #1a365d;
         }
 
-
-
-        /* Bottoni delle fasi (Tabs) */
         .tabs-container {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap; /* Va a capo su mobile */
+            flex-wrap: wrap;
         }
-                .tab-btn {
+        
+        .tab-btn {
             background-color: #e2e8f0;
             color: #4a5568;
             border: none;
             padding: 0 15px;
-            height: 42px; /* Altezza fissa stabilita */
+            height: 42px;
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-flex; /* Centra il testo in altezza */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
@@ -125,41 +114,37 @@
             box-shadow: 0 2px 4px rgba(32, 212, 137, 0.3);
         }
 
-        /* CONTENITORE TABELLE CON SCROLLING */
         .phase-content {
-            display: none; /* Nasconde tutte le tabelle di base */
+            display: none;
             padding: 0;
         }
         .phase-content.active {
-            display: block; /* Mostra solo quella attiva */
+            display: block;
         }
         
         .table-scroll-wrapper {
             width: 100%;
-            max-height: 600px; /* Altezza massima prima di scorrere in verticale */
-            overflow-x: auto;  /* Scorrimento orizzontale */
-            overflow-y: auto;  /* Scorrimento verticale */
+            max-height: 600px;
+            overflow-x: auto;
+            overflow-y: auto;
         }
 
-        /* STILI TABELLA E BLOCCAGGIO (STICKY) */
         table {
-            border-collapse: separate; /* Obbligatorio per far funzionare position: sticky */
+            border-collapse: separate;
             border-spacing: 0;
-            width: max-content; /* Permette alla tabella di essere più larga dello schermo */
+            width: max-content;
             min-width: 100%;
             text-align: center;
         }
-                    th, td {
-            padding: 6px 7px; /* RIDOTTO: era 8px 10px */
-            font-size: 12px;   /* RIDOTTO: era 13px */
+        
+        th, td {
+            padding: 6px 7px;
+            font-size: 12px;
             border-bottom: 1px solid #e0e4e8;
             border-right: 1px solid #e0e4e8;
             white-space: nowrap;
         }
-
-
         
-        /* 1. Prima riga (Partite) bloccata in alto */
         thead tr:nth-child(1) th {
             position: sticky;
             top: 0;
@@ -171,10 +156,9 @@
             font-weight: 600;
         }
         
-        /* 2. Seconda riga (Risultati reali) bloccata sotto la prima */
         thead tr:nth-child(2) th {
             position: sticky;
-            top: 45px; /* Deve corrispondere all'altezza della riga 1 */
+            top: 45px;
             z-index: 10;
             background-color: #20D489;
             color: #0B1D3A;
@@ -182,7 +166,6 @@
             font-weight: 600;
         }
 
-        /* 3. Prima colonna (Nomi Partecipanti) bloccata a sinistra */
         tbody th, tbody td:first-child {
             position: sticky;
             left: 0;
@@ -190,22 +173,20 @@
             background-color: white;
             font-weight: 600;
             text-align: left;
-            border-right: 2px solid #cbd5e1; /* Linea più marcata per separare i nomi */
+            border-right: 2px solid #cbd5e1;
         }
 
-        /* 4. Intersezioni in alto a sinistra (devono stare sopra a tutto) */
         thead tr:nth-child(1) th:first-child { z-index: 15; left: 0; border-right: 2px solid #0B1D3A; }
         thead tr:nth-child(2) th:first-child { z-index: 15; left: 0; border-right: 2px solid #1aa86d; }
 
-            .table-note {
+        .table-note {
             font-size: 12px;
-            color: #64748b; /* Grigio sfumato per non appesantire */
-            padding: 15px 20px 15px 20px;
+            color: #64748b;
+            padding: 15px 20px;
             font-weight: 400;
             text-align: justify;
             line-height: 1.4;
         }
-
 
         .footer {
             text-align: center;
@@ -219,7 +200,6 @@
             background: white;
         }
 
-                /* OTTIMIZZAZIONE MOBILE */
         @media (max-width: 480px) {
             .header { padding: 10px 15px; }
             .header-content { gap: 12px; }
@@ -227,13 +207,8 @@
             .header h1 { font-size: 18px; }
             .header h2 { font-size: 15px; }
             .table-note { font-size: 10px; }
-            
-            /* Aggiornamento per i pulsanti sui telefoni */
             .btn-top { width: 48%; font-size: 13px; height: 30px; }
             .tab-btn { flex-grow: 1; padding: 0 10px; font-size: 13px; height: 30px; }
-        }
-
-
         }
     </style>
 </head>
@@ -249,78 +224,82 @@
         </div>
     </div>
 
-            <div class="nav-area">
-
-            <div class="top-buttons">
-                <a
-href="classifica-fasefinale.html" class="btn-top">Classifica</a>
-                <a href="regolamento.html" class="btn-top">Regolamento</a>
-            </div>
-
-            <div class="tabs-container">
-                <button class="tab-btn" onclick="cambiaFase('sedicesimi')" id="btn-sedicesimi">Sedicesimi</button>
-                <button class="tab-btn" onclick="cambiaFase('ottavi')" id="btn-ottavi">Ottavi</button>
-                <button class="tab-btn" onclick="cambiaFase('quarti')" id="btn-quarti">Quarti</button>
-                <button class="tab-btn" onclick="cambiaFase('semifinali')" id="btn-semifinali">Semifinali</button>
-                <button class="tab-btn" onclick="cambiaFase('finali')" id="btn-finali">Finali</button>
-            </div>
+    <div class="nav-area">
+        <div class="top-buttons">
+            <a href="classifica-fasefinale.html" class="btn-top">Classifica</a>
+            <a href="regolamento.html" class="btn-top">Regolamento</a>
         </div>
 
-                        <div id="sedicesimi" class="phase-content">
-            <div style="padding: 40px; text-align: center; color: #888;">
-                Caricamento pronostici in corso...
-            </div>
-        </div>
-
-
-           
-
-                <div id="ottavi" class="phase-content">
-            <div style="padding: 40px; text-align: center; color: #888;">
-                <h3>Ottavi di finale</h3>
-                <p>Pronostici non ancora disponibili.</p>
-            </div>
-        </div>
-
-        <div id="quarti" class="phase-content">
-            <div style="padding: 40px; text-align: center; color: #888;">
-                <h3>Quarti di finale</h3>
-                <p>Pronostici non ancora disponibili.</p>
-            </div>
-        </div>
-
-        <div id="semifinali" class="phase-content">
-            <div style="padding: 40px; text-align: center; color: #888;">
-                <h3>Semifinali</h3>
-                <p>Pronostici non ancora disponibili.</p>
-            </div>
-        </div>
-
-        <div id="finali" class="phase-content">
-            <div style="padding: 40px; text-align: center; color: #888;">
-                <h3>Finali</h3>
-                <p>Pronostici non ancora disponibili.</p>
-            </div> 
-
-        </div>
-
-
-        <div class="footer">
-            Dati aggiornati in tempo reale
+        <div class="tabs-container">
+            <button class="tab-btn" onclick="cambiaFase('sedicesimi')" id="btn-sedicesimi">Sedicesimi</button>
+            <button class="tab-btn" onclick="cambiaFase('ottavi')" id="btn-ottavi">Ottavi</button>
+            <button class="tab-btn" onclick="cambiaFase('quarti')" id="btn-quarti">Quarti</button>
+            <button class="tab-btn" onclick="cambiaFase('semifinali')" id="btn-semifinali">Semifinali</button>
+            <button class="tab-btn" onclick="cambiaFase('finali')" id="btn-finali">Finali</button>
         </div>
     </div>
 
-        <script>
+    <div id="sedicesimi" class="phase-content">
+        <div style="padding: 40px; text-align: center; color: #888;">
+            Caricamento pronostici in corso...
+        </div>
+    </div>
+
+    <div id="ottavi" class="phase-content">
+        <div style="padding: 40px; text-align: center; color: #888;">
+            Caricamento pronostici in corso...
+        </div>
+    </div>
+
+    <div id="quarti" class="phase-content">
+        <div style="padding: 40px; text-align: center; color: #888;">
+            <h3>Quarti di finale</h3>
+            <p>Pronostici non ancora disponibili.</p>
+        </div>
+    </div>
+
+    <div id="semifinali" class="phase-content">
+        <div style="padding: 40px; text-align: center; color: #888;">
+            <h3>Semifinali</h3>
+            <p>Pronostici non ancora disponibili.</p>
+        </div>
+    </div>
+
+    <div id="finali" class="phase-content">
+        <div style="padding: 40px; text-align: center; color: #888;">
+            <h3>Finali</h3>
+            <p>Pronostici non ancora disponibili.</p>
+        </div> 
+    </div>
+
+    <div class="footer">
+        Dati aggiornati in tempo reale
+    </div>
+
+    <script>
     // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
     const phaseLinks = {
         'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
-        'ottavi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=1542354414&single=true&output=csv', // Lascia vuoto se non c'è ancora
+        'ottavi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=1542354414&single=true&output=csv',
         'quarti': '',
         'semifinali': '',
         'finali': ''
     };
 
-    const faseDiDefault = 'sedicesimi';
+    // ============================================================
+    // MODIFICA: Rilevamento automatico dell'ultima fase inserita
+    // ============================================================
+    let faseDiDefault = 'sedicesimi'; // Valore di partenza obbligatorio
+    const ordineFasi = ['sedicesimi', 'ottavi', 'quarti', 'semifinali', 'finali'];
+
+    // Scorre l'elenco e sposta il default sulla fase più avanzata che ha un link valido
+    for (let i = 0; i < ordineFasi.length; i++) {
+        const nomeFase = ordineFasi[i];
+        if (phaseLinks[nomeFase] && phaseLinks[nomeFase].trim() !== '') {
+            faseDiDefault = nomeFase;
+        }
+    }
+    // ============================================================
 
     // Funzione per caricare i dati
     async function loadPhaseData(phaseName) {
@@ -333,7 +312,6 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
             const response = await fetch(url);
             const csvText = await response.text();
             
-            // Pulisce le righe vuote
             const rows = csvText.split('\n').filter(row => row.trim() !== '');
             
             let html = '<div class="table-scroll-wrapper"><table><thead>';
@@ -350,7 +328,7 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
 
             html += '</thead><tbody>';
 
-            // Righe partecipanti (dalla 3 in poi)
+            // Righe partecipanti
             for (let i = 2; i < rows.length; i++) {
                 html += '<tr>';
                 rows[i].split(',').forEach(cell => html += `<td>${cell.replace(/"/g, '').trim()}</td>`);
@@ -359,7 +337,6 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
 
             html += '</tbody></table></div>';
 
-            // INSERISCE LA NOTA IN AUTOMATICO SOLO NEI SEDICESIMI
             if (phaseName === 'sedicesimi') {
                 html += `<div class="table-note">* Squadra indicata con l'invio dei pronostici del Bollettone FIFA 2026 - Fase a gironi</div>`;
             }
@@ -379,14 +356,13 @@ href="classifica-fasefinale.html" class="btn-top">Classifica</a>
         target.classList.add('active');
         document.getElementById('btn-' + nomeFase).classList.add('active');
 
-        // Se il contenitore ha la scritta "Caricamento..." o "non ancora disponibili", scarica i dati
         if ((target.innerHTML.includes('non ancora disponibili') || target.innerHTML.includes('Caricamento')) && phaseLinks[nomeFase]) {
             target.innerHTML = '<div style="padding:40px; text-align:center; color:#888;">Caricamento pronostici in corso...</div>';
             loadPhaseData(nomeFase);
         }
     }
 
-    // Inizializza la pagina al primo avvio
+    // Inizializza la pagina con la fase rilevata automaticamente
     cambiaFase(faseDiDefault);
     </script>
 
