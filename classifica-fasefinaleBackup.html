@@ -206,6 +206,82 @@
             border-top: 1px solid #f0f0f0;
         }
 
+
+        /* --- PODIO FINALE --- */
+        .podium-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            padding: 40px 20px 30px 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(to bottom, #ffffff, #f8fafc);
+        }
+
+        .podium-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 120px;
+        }
+
+        .podium-name {
+            font-size: 15px;
+            font-weight: 800;
+            color: #0B1D3A;
+            text-align: center;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .podium-block {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 15px;
+            border-radius: 6px 6px 0 0;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+            color: white;
+            font-weight: 800;
+            font-size: 28px;
+        }
+
+        /* Colori e altezze dei 3 gradini */
+        .step-1 .podium-block {
+            height: 130px;
+            background: linear-gradient(135deg, #FFD700, #FDB931); /* Oro */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .step-2 .podium-block {
+            height: 90px;
+            background: linear-gradient(135deg, #E0E0E0, #BDBDBD); /* Argento */
+        }
+
+        .step-3 .podium-block {
+            height: 60px;
+            background: linear-gradient(135deg, #CD7F32, #A0522D); /* Bronzo */
+        }
+
+        /* Coroncina animata per il primo posto */
+        .podium-crown {
+            font-size: 26px;
+            margin-bottom: 5px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+
+
+
+
         /* Ottimizzazione Mobile */
         @media (max-width: 480px) {
             .header { padding: 10px 15px; }
@@ -226,6 +302,16 @@
         /* Classe di utilità per nascondere le colonne non attive */
         .hidden-col {
             display: none !important;
+
+            /* Adattamento Podio per Mobile */
+            .podium-container { padding: 30px 10px 20px 10px; gap: 8px; }
+            .podium-name { font-size: 12px; }
+            .step-1 .podium-block { height: 110px; font-size: 22px; }
+            .step-2 .podium-block { height: 75px; font-size: 22px; }
+            .step-3 .podium-block { height: 50px; font-size: 22px; }
+
+
+
         }
     </style>
 </head>
@@ -260,6 +346,31 @@
                  <button id="btn-bonus" class="btn-group" onclick="cambiaGruppo('bonus')">Punti bonus</button>
              </div>
         </div>
+
+     
+
+   <div class="podium-container">
+            
+            <div class="podium-step step-2">
+                <div class="podium-name">Nome 2</div>
+                <div class="podium-block">2</div>
+            </div>
+
+            <div class="podium-step step-1">
+                <div class="podium-crown">👑</div>
+                <div class="podium-name">Nome 1</div>
+                <div class="podium-block">1</div>
+            </div>
+
+            <div class="podium-step step-3">
+                <div class="podium-name">Nome 3</div>
+                <div class="podium-block">3</div>
+            </div>
+
+        </div>
+
+
+
 
         <!-- Tabella -->
         <div class="table-wrapper">
