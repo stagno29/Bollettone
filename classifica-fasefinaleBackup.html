@@ -230,7 +230,7 @@
             margin-bottom: 10px;
             word-wrap: break-word;
             opacity: 0;
-            animation: fadeInAfter 0.4s ease-out 1s forwards; /* Appare dopo 1 secondo */
+            animation: fadeInUp 0.4s ease-out 1s forwards; /* Appare dopo 1 secondo */
         }
 
         .podium-block {
@@ -258,7 +258,7 @@
             /* MODIFICA QUESTA RIGA: */
             opacity: 0;
             /* Combina la comparsa (dopo 1s) e l'oscillazione classica (che inizia a 1.4s) */
-            animation: fadeInAfter 0.4s ease-out 1s forwards, float 2s ease-in-out 1.4s infinite;
+            animation: fadeInAfter 0.4s ease-out 1.5s forwards, float 2s ease-in-out 1.9s infinite;
         }
 
 
@@ -314,15 +314,15 @@
             }
         }
 
-        /* ANIMAZIONE: COMPARSA DELICATA NOMI E CORONA */
-        @keyframes fadeInAfter {
+        /* NUOVA ANIMAZIONE: COMPARSA DAL BASSO PER NOMI E CORONA */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-5px); /* Un leggero effetto discesa rende l'apparizione più morbida */
+                transform: translateY(10px); /* Parte leggermente più in basso */
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0); /* Sale alla posizione corretta */
             }
         }
 
