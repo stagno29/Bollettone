@@ -42,7 +42,8 @@
             margin: 0 auto;
             gap: 20px;
         }
-        .logo { width: 85px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .logo { width: 85px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); 
+animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         .titles { display: flex; flex-direction: column; }
         .header h1 { color: #ffffff; margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1; }
         .header h2 { color: #20D489; margin: 5px 0 0 0; font-size: 22px; font-weight: 600; }
@@ -210,6 +211,16 @@
             .btn-top { width: 48%; font-size: 13px; height: 30px; }
             .tab-btn { flex-grow: 1; padding: 0 10px; font-size: 13px; height: 30px; }
         }
+
+/* REGOLA PER LA ROTAZIONE DEL LOGO */
+@keyframes spinOnLoad {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(720deg); /* 720 gradi = 2 giri completi */
+    }
+}
     </style>
 </head>
 <body>
