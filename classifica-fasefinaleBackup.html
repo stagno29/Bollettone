@@ -262,6 +262,11 @@
         }
 
 
+/* COLORI E ALTEZZE GRADINI DESKTOP */
+        .step-1 .podium-block { height: 140px; background-color: #FFD700; } /* Oro */
+        .step-2 .podium-block { height: 100px; background-color: #C0C0C0; } /* Argento */
+        .step-3 .podium-block { height: 70px; background-color: #CD7F32; } /* Bronzo */
+
         /* Ottimizzazione Mobile */
         @media (max-width: 480px) {
             .header { padding: 10px 15px; }
@@ -274,10 +279,15 @@
             .btn-group { flex-grow: 1; font-size: 13px; padding: 0px 10px; height: 30px; }
             th, td { font-size: 13px; padding: 12px 7px; }
 
-            /* Adattamento Podio per Mobile (Spostato qui dentro correttamente) */
+            /* Adattamento Podio per Mobile */
             .podium-container { padding: 30px 10px 20px 10px; gap: 8px; }
             .podium-name { font-size: 12px; }
             
+            /* ALTEZZE MOBILE DA AGGIUNGERE */
+            .step-1 .podium-block { height: 110px; font-size: 22px; }
+            .step-2 .podium-block { height: 75px; font-size: 22px; }
+            .step-3 .podium-block { height: 50px; font-size: 22px; }
+        } /* <--- QUESTA PARENTESI GRAFFA È FONDAMENTALE */
 
         /* Classe di utilità per nascondere le colonne non attive */
         .hidden-col {
@@ -316,6 +326,12 @@
             }
         }
 
+
+/* ANIMAZIONE: OSCILLAZIONE CORONA */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
 
 
     </style>
