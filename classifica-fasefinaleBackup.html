@@ -6,8 +6,8 @@
     <title>Classifica - Bollettone FIFA 2026</title>
     
     <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B1D3A"> 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0B1D3A"> 
  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
         }
         
         .container {
-            max-width: 700px; /* Mantengo la tua larghezza di 700px */
+            max-width: 700px;
             margin: 0 auto 30px auto;
             background: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -50,6 +50,8 @@
             height: auto;
             flex-shrink: 0;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            /* ANIMAZIONE LOGO: nome, durata, curva di decelerazione accentuata, mantiene lo stato finale */
+            animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;
         }
 
         .titles {
@@ -74,7 +76,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* AREA PULSANTI NAVIGAZIONE (Uguale alle altre pagine) */
+        /* AREA PULSANTI NAVIGAZIONE */
         .nav-area {
             padding: 20px;
             background-color: #f8fafc;
@@ -100,38 +102,36 @@
             font-weight: 600;
             font-size: 14px;
             transition: background-color 0.2s;
-          <!--  width: 190px; /* LARGHEZZA FISSA: li rende identici */ -->
-            height: 42px; /* ALTEZZA FISSA: li rende uguali alle schede delle fasi */
-            display: inline-flex; /* Centra perfettamente il testo */
+            height: 42px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
         }
 
-
         .btn-top:hover {
             background-color: #1a365d;
         }
 
-
-        /* PULSANTI SCELTA GRUPPO (Fasi / Bonus) */
+        /* PULSANTI SCELTA GRUPPO */
         .group-nav {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap; /* Va a capo su mobile */
+            flex-wrap: wrap;
         }
-           .btn-group {
+        
+        .btn-group {
             background-color: #e2e8f0;
             color: #4a5568;
             border: none;
             padding: 0 15px;
-            height: 42px; /* Altezza fissa stabilita */
+            height: 42px;
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-flex; /* Centra il testo in altezza */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
@@ -144,7 +144,7 @@
             box-shadow: 0 2px 4px rgba(32, 212, 137, 0.3);
         }
 
-        /* Stile Tabella Minimale */
+        /* Stile Tabella */
         .table-wrapper {
             overflow-x: auto;
             padding: 5px 0px 30px 0px;
@@ -174,23 +174,19 @@
             color: #2c3e50;
         }
 
-        /* Dà un po' di respiro al testo vicino ai bordi esterni senza stringere la tabella */
         th:first-child, td:first-child { padding-left: 15px; }
         th:last-child, td:last-child { padding-right: 15px; }
 
-
-        /* ECCEZIONE: Seconda colonna allineata a sinistra */
         td:nth-child(2) {
             text-align: left;
             color: #0B1D3A;
         }
-         /* ECCEZIONE: Colonna Totale in grassetto */
+        
         td:nth-child(3) {
             font-weight: 800;
             color: #0B1D3A; 
         }
      
-        /* Evidenziazione delicata per le prime 3 posizioni */
         tr:nth-child(1) td { background-color: rgba(32, 212, 137, 0.15); } 
         tr:nth-child(2) td { background-color: rgba(32, 212, 137, 0.10); } 
         tr:nth-child(3) td { background-color: rgba(32, 212, 137, 0.05); } 
@@ -205,7 +201,6 @@
             letter-spacing: 1px;
             border-top: 1px solid #f0f0f0;
         }
-
 
         /* --- PODIO FINALE --- */
         .podium-container {
@@ -248,24 +243,22 @@
             font-size: 28px;
         }
 
-        /* Colori e altezze dei 3 gradini */
         .step-1 .podium-block {
             height: 130px;
-            background: linear-gradient(135deg, #FFD700, #FDB931); /* Oro */
+            background: linear-gradient(135deg, #FFD700, #FDB931);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .step-2 .podium-block {
             height: 90px;
-            background: linear-gradient(135deg, #E0E0E0, #BDBDBD); /* Argento */
+            background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
         }
 
         .step-3 .podium-block {
             height: 60px;
-            background: linear-gradient(135deg, #CD7F32, #A0522D); /* Bronzo */
+            background: linear-gradient(135deg, #CD7F32, #A0522D);
         }
 
-        /* Coroncina animata per il primo posto */
         .podium-crown {
             font-size: 26px;
             margin-bottom: 5px;
@@ -278,10 +271,6 @@
             100% { transform: translateY(0px); }
         }
 
-
-
-
-
         /* Ottimizzazione Mobile */
         @media (max-width: 480px) {
             .header { padding: 10px 15px; }
@@ -290,34 +279,36 @@
             .header h1 { font-size: 18px; letter-spacing: 0; }
             .header h2 { font-size: 15px; }
             
-            /* Bottoni nav sopra */
-            .btn-top {width: 48%; font-size: 13px; height: 30px; }
-            
-            /* Bottoni gruppi tabella */
-            .btn-group {flex-grow: 1; font-size: 13px; padding: 0px 10px; height: 30px}
-            
+            .btn-top { width: 48%; font-size: 13px; height: 30px; }
+            .btn-group { flex-grow: 1; font-size: 13px; padding: 0px 10px; height: 30px; }
             th, td { font-size: 13px; padding: 12px 7px; }
-        }
 
-        /* Classe di utilità per nascondere le colonne non attive */
-        .hidden-col {
-            display: none !important;
-
-            /* Adattamento Podio per Mobile */
+            /* Adattamento Podio per Mobile (Spostato qui dentro correttamente) */
             .podium-container { padding: 30px 10px 20px 10px; gap: 8px; }
             .podium-name { font-size: 12px; }
             .step-1 .podium-block { height: 110px; font-size: 22px; }
             .step-2 .podium-block { height: 75px; font-size: 22px; }
             .step-3 .podium-block { height: 50px; font-size: 22px; }
+        }
 
+        /* Classe di utilità per nascondere le colonne non attive */
+        .hidden-col {
+            display: none !important;
+        }
 
-
+        /* REGOLA DEI KEYFRAMES PER LA ROTAZIONE DEL LOGO */
+        @keyframes spinOnLoad {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(720deg); /* 720 gradi = 2 giri completi */
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header a banda piena -->
     <div class="header">
         <div class="header-content">
             <img src="logo-bollettone-fifa26.png" alt="Logo Bollettone FIFA 2026" class="logo">
@@ -328,57 +319,39 @@
         </div>
     </div>
 
-    <!-- Contenitore Principale -->
     <div class="container">
         
-        <!-- Navigazione (copia di Pronostici/Regolamento) -->
         <div class="nav-area">
-            
             <div class="top-buttons">
                 <a href="pronostici.html" class="btn-top">Pronostici</a>
                 <a href="regolamento.html" class="btn-top">Regolamento</a>
             </div>
         
-
-        <!-- Pulsanti Scelta Gruppo Colonne -->
             <div class="group-nav">
                  <button id="btn-fase" class="btn-group active" onclick="cambiaGruppo('fase')">Punti per fase</button>
                  <button id="btn-bonus" class="btn-group" onclick="cambiaGruppo('bonus')">Punti bonus</button>
              </div>
         </div>
 
-     
-
-          <div class="podium-container" style="display: none;">
-            
+        <div class="podium-container" style="display: none;">
             <div class="podium-step step-2">
                 <div class="podium-name">Nome 2</div>
                 <div class="podium-block">2</div>
             </div>
-
             <div class="podium-step step-1">
                 <div class="podium-crown">👑</div>
                 <div class="podium-name">nome1</div>
                 <div class="podium-block">1</div>
             </div>
-
             <div class="podium-step step-3">
                 <div class="podium-name">Nome3</div>
                 <div class="podium-block">3</div>
             </div>
-
         </div>
 
-
-
-
-
-        <!-- Tabella -->
         <div class="table-wrapper">
             <table id="classifica">
-                <thead id="table-head">
-                    <!-- Intestazioni generate da JS -->
-                </thead>
+                <thead id="table-head"></thead>
                 <tbody id="table-body">
                     <tr><td colspan="4" style="text-align:center; padding: 40px;">Caricamento classifica in corso...</td></tr>
                 </tbody>
@@ -388,17 +361,15 @@
         <div class="footer">
             Dati aggiornati in tempo reale
         </div>
-
     </div>
 
     <script>
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=872113450&single=true&output=csv';
+        const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSCYfuZRkMNP2cv05ZUiCLnVNhzgJ18knMZ5bK4ffNIzMqH-inqJEtmIBY_tDYX1OjDiMNfV_KXiXFS/pub?gid=1925457345&single=true&output=csv';
 
-        // Funzione per determinare la classe della colonna in base all'indice
         function getColClass(index) {
-            if (index >= 0 && index <= 2) return 'col-fissa';   // Col 1, 2, 3 (sempre visibili)
-            if (index >= 3 && index <= 6) return 'col-bonus';   // Col 4, 5, 6, 7 (Gruppo Bonus)
-            if (index >= 7) return 'col-fase';                  // Col 8, 9, 10, 11, 12 (Gruppo Fase)
+            if (index >= 0 && index <= 2) return 'col-fissa';
+            if (index >= 3 && index <= 6) return 'col-bonus';
+            if (index >= 7) return 'col-fase';
             return '';
         }
 
@@ -408,7 +379,6 @@
                 const righe = data.split('\n').filter(row => row.trim() !== '');
                 const intestazioni = righe[0].split(',');
                 
-                // Creazione Intestazioni (thead)
                 let theadHtml = '<tr>';
                 intestazioni.forEach((titolo, index) => {
                     const classeColonna = getColClass(index);
@@ -417,7 +387,6 @@
                 theadHtml += '</tr>';
                 document.getElementById('table-head').innerHTML = theadHtml;
 
-                // Creazione Righe (tbody)
                 let tbodyHtml = '';
                 for (let i = 1; i < righe.length; i++) {
                     const colonne = righe[i].split(',');
@@ -430,8 +399,6 @@
                 }
                 
                 document.getElementById('table-body').innerHTML = tbodyHtml;
-
-                // Alla fine del caricamento, imposta di default la vista su "fase"
                 cambiaGruppo('fase');
             })
             .catch(error => {
@@ -439,14 +406,11 @@
                 document.getElementById('table-body').innerHTML = '<tr><td colspan="4" style="text-align:center; color:#e74c3c;">Impossibile caricare la classifica.</td></tr>';
             });
 
-        // Funzione per mostrare/nascondere le colonne
         function cambiaGruppo(gruppo) {
-            // Aggiorna lo stile dei bottoni
             document.getElementById('btn-fase').classList.remove('active');
             document.getElementById('btn-bonus').classList.remove('active');
             document.getElementById('btn-' + gruppo).classList.add('active');
 
-            // Prende tutte le colonne di tipo bonus e fase (sia thead che tbody)
             const colBonus = document.querySelectorAll('.col-bonus');
             const colFase = document.querySelectorAll('.col-fase');
 
@@ -459,6 +423,5 @@
             }
         }
     </script>
-
 </body>
 </html>
