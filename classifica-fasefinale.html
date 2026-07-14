@@ -50,6 +50,7 @@
             height: auto;
             flex-shrink: 0;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;
         }
 
         .titles {
@@ -310,6 +311,16 @@
             .step-2 .podium-block { height: 75px; font-size: 22px; }
             .step-3 .podium-block { height: 50px; font-size: 22px; }
 
+
+/* REGOLA PER LA ROTAZIONE DEL LOGO */
+@keyframes spinOnLoad {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(720deg); /* 720 gradi = 2 giri completi */
+    }
+}
 
     </style>
 </head>
