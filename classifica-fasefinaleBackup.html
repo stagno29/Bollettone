@@ -220,7 +220,6 @@
             align-items: center;
             flex: 1;
             max-width: 120px;
-            opacity: 0;
         }
 
         .podium-name {
@@ -230,6 +229,8 @@
             text-align: center;
             margin-bottom: 10px;
             word-wrap: break-word;
+            opacity: 0;
+            animation: fadeInAfter 0.4s ease-out 1s forwards; /* Appare dopo 1 secondo */
         }
 
         .podium-block {
@@ -242,42 +243,24 @@
             color: white;
             font-weight: 800;
             font-size: 28px;
+            transform-origin: bottom; /* Mantiene la base ancorata in basso */
+            transform: scaleY(0);     /* Parte completamente schiacciato */
+            animation: expandUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Sale in 1 secondo */
         }
 
-        .step-1 .podium-block {
-            height: 130px;
-            background: linear-gradient(135deg, #FFD700, #FDB931);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .step-2 .podium-block {
-            height: 90px;
-            background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
-        }
-
-        .step-3 .podium-block {
-            height: 60px;
-            background: linear-gradient(135deg, #CD7F32, #A0522D);
-        }
+        
+      
 
         .podium-crown {
             font-size: 26px;
             margin-bottom: 5px;
-            animation: float 2s ease-in-out infinite;
+
+            /* MODIFICA QUESTA RIGA: */
+            opacity: 0;
+            /* Combina la comparsa (dopo 1s) e l'oscillazione classica (che inizia a 1.4s) */
+            animation: fadeInAfter 0.4s ease-out 1s forwards, float 2s ease-in-out 1.4s infinite;
         }
 
-/* Ordine di apparizione del podio */
-        .step-3 { animation: riseUp 0.6s ease-out 0.2s forwards; } /* Bronzo */
-        .step-2 { animation: riseUp 0.6s ease-out 0.9s forwards; } /* Argento */
-        .step-1 { animation: riseUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.6s forwards; } /* Oro (con effetto rimbalzo) */
-
-
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
-        }
 
         /* Ottimizzazione Mobile */
         @media (max-width: 480px) {
@@ -294,10 +277,7 @@
             /* Adattamento Podio per Mobile (Spostato qui dentro correttamente) */
             .podium-container { padding: 30px 10px 20px 10px; gap: 8px; }
             .podium-name { font-size: 12px; }
-            .step-1 .podium-block { height: 110px; font-size: 22px; }
-            .step-2 .podium-block { height: 75px; font-size: 22px; }
-            .step-3 .podium-block { height: 50px; font-size: 22px; }
-        }
+            
 
         /* Classe di utilità per nascondere le colonne non attive */
         .hidden-col {
@@ -314,18 +294,27 @@
             }
         }
 
-/* REGOLA PER L'ENTRATA DEI GRADINI DAL BASSO */
-        @keyframes riseUp {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
+/* ANIMAZIONE: ESPANSIONE GRADINI */
+        @keyframes expandUp {
+            from {
+                transform: scaleY(0);
             }
-            100% {
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        /* ANIMAZIONE: COMPARSA DELICATA NOMI E CORONA */
+        @keyframes fadeInAfter {
+            from {
+                opacity: 0;
+                transform: translateY(-5px); /* Un leggero effetto discesa rende l'apparizione più morbida */
+            }
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
 
 
 
