@@ -221,6 +221,19 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         transform: rotate(720deg); /* 720 gradi = 2 giri completi */
     }
 }
+
+        /* Da inserire nel tag <style> se manca in questa pagina */
+        .live-score {
+            color: #ff3b30 !important;
+            animation: liveBlink 1.5s ease-in-out infinite; 
+        }
+
+        @keyframes liveBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+        }
+
+
     </style>
 </head>
 <body>
@@ -333,18 +346,20 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             html += '</tr>';
 
             // Riga 2: Risultati Reali
+                        // === SOSTITUISCI DA QUI ===
+            // Riga 2: Risultati Reali
             html += '<tr>';
-            rows[1].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
+            rows[1].split(',').forEach((cell, index) => {
+                // Se siamo nelle finali e la colonna è la C (indice 2), aggiunge la classe live
+                if (phaseName === 'finali' && index === 2) {
+                    html += `<th class="live-score">${cell.replace(/"/g, '').trim()}</th>`;
+                } else {
+                    html += `<th>${cell.replace(/"/g, '').trim()}</th>`;
+                }
+            });
             html += '</tr>';
+            // === A QUI ===
 
-            html += '</thead><tbody>';
-
-            // Righe partecipanti
-            for (let i = 2; i < rows.length; i++) {
-                html += '<tr>';
-                rows[i].split(',').forEach(cell => html += `<td>${cell.replace(/"/g, '').trim()}</td>`);
-                html += '</tr>';
-            }
 
             html += '</tbody></table></div>';
 
