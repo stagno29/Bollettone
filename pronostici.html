@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pronostici - Bollettone FIFA 2026</title>
-
+    
     <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0B1D3A"> 
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
+    
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -21,7 +21,7 @@
             padding: 0;
             color: #333;
         }
-
+        
         .container {
             max-width: 800px;
             margin: 0 auto 30px auto;
@@ -56,7 +56,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             flex-direction: column;
             gap: 15px;
         }
-
+        
         .top-buttons {
             display: flex;
             justify-content: space-between;
@@ -90,7 +90,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             gap: 10px;
             flex-wrap: wrap;
         }
-
+        
         .tab-btn {
             background-color: #e2e8f0;
             color: #4a5568;
@@ -122,7 +122,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         .phase-content.active {
             display: block;
         }
-
+        
         .table-scroll-wrapper {
             width: 100%;
             max-height: 600px;
@@ -137,7 +137,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             min-width: 100%;
             text-align: center;
         }
-
+        
         th, td {
             padding: 6px 7px;
             font-size: 12px;
@@ -145,7 +145,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             border-right: 1px solid #e0e4e8;
             white-space: nowrap;
         }
-
+        
         thead tr:nth-child(1) th {
             position: sticky;
             top: 0;
@@ -156,7 +156,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             box-sizing: border-box;
             font-weight: 600;
         }
-
+        
         thead tr:nth-child(2) th {
             position: sticky;
             top: 45px;
@@ -221,21 +221,6 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         transform: rotate(720deg); /* 720 gradi = 2 giri completi */
     }
 }
-
-                        .live-score {
-            font-weight: 800 !important;
-            animation: pulseText 2.0s ease-in-out infinite; 
-        }
-
-                @keyframes pulseText {
-            0%, 100% { color: #20D489; } /* Momento in cui è totalmente invisibile */
-            30%, 80% { color: #ff3b30; } /* Finestra in cui resta ben visibile in rosso */
-        }
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -302,7 +287,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         Dati aggiornati in tempo reale
     </div>
 
-        <script>
+    <script>
     // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
     const phaseLinks = {
         'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
@@ -312,16 +297,20 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         'finali': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=2130027922&single=true&output=csv'
     };
 
-    // Rilevamento automatico dell'ultima fase inserita
-    let faseDiDefault = 'sedicesimi';
+    // ============================================================
+    // MODIFICA: Rilevamento automatico dell'ultima fase inserita
+    // ============================================================
+    let faseDiDefault = 'sedicesimi'; // Valore di partenza obbligatorio
     const ordineFasi = ['sedicesimi', 'ottavi', 'quarti', 'semifinali', 'finali'];
 
+    // Scorre l'elenco e sposta il default sulla fase più avanzata che ha un link valido
     for (let i = 0; i < ordineFasi.length; i++) {
         const nomeFase = ordineFasi[i];
         if (phaseLinks[nomeFase] && phaseLinks[nomeFase].trim() !== '') {
             faseDiDefault = nomeFase;
         }
     }
+    // ============================================================
 
     // Funzione per caricare i dati
     async function loadPhaseData(phaseName) {
@@ -333,23 +322,27 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         try {
             const response = await fetch(url);
             const csvText = await response.text();
+            
             const rows = csvText.split('\n').filter(row => row.trim() !== '');
-
-            // Inizio costruzione tabella
+            
             let html = '<div class="table-scroll-wrapper"><table><thead>';
-
-            // Riga 1: Header (Partite)
+            
+            // Riga 1: Partite (Header)
             html += '<tr>';
             rows[0].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
             html += '</tr>';
 
-            
-            // Riga 3 in poi: Partecipanti
+            // Riga 2: Risultati Reali
+            html += '<tr>';
+            rows[1].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
+            html += '</tr>';
+
+            html += '</thead><tbody>';
+
+            // Righe partecipanti
             for (let i = 2; i < rows.length; i++) {
                 html += '<tr>';
-                rows[i].split(',').forEach(cell => {
-                    html += `<td>${cell.replace(/"/g, '').trim()}</td>`;
-                });
+                rows[i].split(',').forEach(cell => html += `<td>${cell.replace(/"/g, '').trim()}</td>`);
                 html += '</tr>';
             }
 
@@ -369,7 +362,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
     function cambiaFase(nomeFase) {
         document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
+        
         const target = document.getElementById(nomeFase);
         target.classList.add('active');
         document.getElementById('btn-' + nomeFase).classList.add('active');
@@ -380,10 +373,9 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         }
     }
 
-    // Inizializza la pagina
+    // Inizializza la pagina con la fase rilevata automaticamente
     cambiaFase(faseDiDefault);
     </script>
-
 
 </body>
 </html>
