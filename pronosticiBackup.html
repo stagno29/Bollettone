@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pronostici - Bollettone FIFA 2026</title>
-    
+
     <link rel="icon" type="image/png" href="logo-bollettone-fifa26.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0B1D3A"> 
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -21,7 +21,7 @@
             padding: 0;
             color: #333;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto 30px auto;
@@ -42,7 +42,8 @@
             margin: 0 auto;
             gap: 20px;
         }
-        .logo { width: 85px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .logo { width: 85px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); 
+animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         .titles { display: flex; flex-direction: column; }
         .header h1 { color: #ffffff; margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1; }
         .header h2 { color: #20D489; margin: 5px 0 0 0; font-size: 22px; font-weight: 600; }
@@ -55,7 +56,7 @@
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .top-buttons {
             display: flex;
             justify-content: space-between;
@@ -89,7 +90,7 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-        
+
         .tab-btn {
             background-color: #e2e8f0;
             color: #4a5568;
@@ -121,7 +122,7 @@
         .phase-content.active {
             display: block;
         }
-        
+
         .table-scroll-wrapper {
             width: 100%;
             max-height: 600px;
@@ -136,7 +137,7 @@
             min-width: 100%;
             text-align: center;
         }
-        
+
         th, td {
             padding: 6px 7px;
             font-size: 12px;
@@ -144,7 +145,7 @@
             border-right: 1px solid #e0e4e8;
             white-space: nowrap;
         }
-        
+
         thead tr:nth-child(1) th {
             position: sticky;
             top: 0;
@@ -155,14 +156,14 @@
             box-sizing: border-box;
             font-weight: 600;
         }
-        
+
         thead tr:nth-child(2) th {
             position: sticky;
             top: 45px;
             z-index: 10;
             background-color: #20D489;
             color: #0B1D3A;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
 
@@ -210,6 +211,16 @@
             .btn-top { width: 48%; font-size: 13px; height: 30px; }
             .tab-btn { flex-grow: 1; padding: 0 10px; font-size: 13px; height: 30px; }
         }
+
+/* REGOLA PER LA ROTAZIONE DEL LOGO */
+@keyframes spinOnLoad {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(720deg); /* 720 gradi = 2 giri completi */
+    }
+}
     </style>
 </head>
 <body>
@@ -281,9 +292,9 @@
     const phaseLinks = {
         'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
         'ottavi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=1542354414&single=true&output=csv',
-        'quarti': '',
-        'semifinali': '',
-        'finali': ''
+        'quarti': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=1555163094&single=true&output=csv',
+        'semifinali': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=2024461111&single=true&output=csv',
+        'finali': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=2130027922&single=true&output=csv'
     };
 
     // ============================================================
@@ -311,11 +322,11 @@
         try {
             const response = await fetch(url);
             const csvText = await response.text();
-            
+
             const rows = csvText.split('\n').filter(row => row.trim() !== '');
-            
+
             let html = '<div class="table-scroll-wrapper"><table><thead>';
-            
+
             // Riga 1: Partite (Header)
             html += '<tr>';
             rows[0].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
@@ -351,7 +362,7 @@
     function cambiaFase(nomeFase) {
         document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        
+
         const target = document.getElementById(nomeFase);
         target.classList.add('active');
         document.getElementById('btn-' + nomeFase).classList.add('active');
