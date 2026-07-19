@@ -227,10 +227,11 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
             animation: pulseText 1.5s ease-in-out infinite; 
         }
 
-        @keyframes pulseText {
-            0%, 100% { color: #20D489; } /* Diventa identico allo sfondo (scompare) */
-            50% { color: #ff3b30; }      /* Appare in rosso acceso */
+                @keyframes pulseText {
+            0%, 100% { color: #20D489; } /* Momento in cui è totalmente invisibile */
+            30%, 80% { color: #ff3b30; } /* Finestra in cui resta ben visibile in rosso */
         }
+
 
 
 
