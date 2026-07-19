@@ -222,16 +222,17 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
     }
 }
 
-        /* Da inserire nel tag <style> se manca in questa pagina */
+                /* La classe ora pulsa solo il colore del testo, non l'opacità */
         .live-score {
-            color: #ff3b30 !important;
-            animation: liveBlink 1.5s ease-in-out infinite; 
+            font-weight: 800 !important;
+            animation: pulseText 1.5s ease-in-out infinite; 
         }
 
-        @keyframes liveBlink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.25; }
+        @keyframes pulseText {
+            0%, 100% { color: #0B1D3A; } /* Colore standard del testo in quella riga */
+            50% { color: #ff3b30; }      /* Rosso acceso */
         }
+
 
 
     </style>
@@ -300,7 +301,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         Dati aggiornati in tempo reale
     </div>
 
-    <script>
+        <script>
     // === CONFIGURAZIONE: Inserisci qui i link ai tuoi CSV ===
     const phaseLinks = {
         'sedicesimi': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=256634440&single=true&output=csv',
@@ -310,20 +311,16 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         'finali': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSG5mag5aHdHwjItYK5SdouJQMGf3o_SYYTovlr75iBjuxYDvHr6IxQSP5GCyzzl0MleHuTY3crUscu/pub?gid=2130027922&single=true&output=csv'
     };
 
-    // ============================================================
-    // MODIFICA: Rilevamento automatico dell'ultima fase inserita
-    // ============================================================
-    let faseDiDefault = 'sedicesimi'; // Valore di partenza obbligatorio
+    // Rilevamento automatico dell'ultima fase inserita
+    let faseDiDefault = 'sedicesimi';
     const ordineFasi = ['sedicesimi', 'ottavi', 'quarti', 'semifinali', 'finali'];
 
-    // Scorre l'elenco e sposta il default sulla fase più avanzata che ha un link valido
     for (let i = 0; i < ordineFasi.length; i++) {
         const nomeFase = ordineFasi[i];
         if (phaseLinks[nomeFase] && phaseLinks[nomeFase].trim() !== '') {
             faseDiDefault = nomeFase;
         }
     }
-    // ============================================================
 
     // Funzione per caricare i dati
     async function loadPhaseData(phaseName) {
@@ -335,31 +332,36 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         try {
             const response = await fetch(url);
             const csvText = await response.text();
-
             const rows = csvText.split('\n').filter(row => row.trim() !== '');
 
+            // Inizio costruzione tabella
             let html = '<div class="table-scroll-wrapper"><table><thead>';
-
-            // Riga 1: Partite (Header)
+            
+            // Riga 1: Header (Partite)
             html += '<tr>';
             rows[0].split(',').forEach(cell => html += `<th>${cell.replace(/"/g, '').trim()}</th>`);
             html += '</tr>';
 
-            // Riga 2: Risultati Reali
-                        // === SOSTITUISCI DA QUI ===
-            // Riga 2: Risultati Reali
+            // Riga 2: Risultati Reali (Applichiamo la classe live-score solo se siamo nelle finali colonna 2)
             html += '<tr>';
             rows[1].split(',').forEach((cell, index) => {
-                // Se siamo nelle finali e la colonna è la C (indice 2), aggiunge la classe live
+                const cellText = cell.replace(/"/g, '').trim();
                 if (phaseName === 'finali' && index === 2) {
-                    html += `<th class="live-score">${cell.replace(/"/g, '').trim()}</th>`;
+                    html += `<th class="live-score">${cellText}</th>`;
                 } else {
-                    html += `<th>${cell.replace(/"/g, '').trim()}</th>`;
+                    html += `<th>${cellText}</th>`;
                 }
             });
-            html += '</tr>';
-            // === A QUI ===
+            html += '</tr></thead><tbody>';
 
+            // Riga 3 in poi: Partecipanti
+            for (let i = 2; i < rows.length; i++) {
+                html += '<tr>';
+                rows[i].split(',').forEach(cell => {
+                    html += `<td>${cell.replace(/"/g, '').trim()}</td>`;
+                });
+                html += '</tr>';
+            }
 
             html += '</tbody></table></div>';
 
@@ -377,7 +379,7 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
     function cambiaFase(nomeFase) {
         document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
+        
         const target = document.getElementById(nomeFase);
         target.classList.add('active');
         document.getElementById('btn-' + nomeFase).classList.add('active');
@@ -388,9 +390,10 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
         }
     }
 
-    // Inizializza la pagina con la fase rilevata automaticamente
+    // Inizializza la pagina
     cambiaFase(faseDiDefault);
     </script>
+
 
 </body>
 </html>
