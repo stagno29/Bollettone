@@ -222,16 +222,16 @@ animation: spinOnLoad 2.5s cubic-bezier(0.1, 1, 0.2, 1) forwards;}
     }
 }
 
-                /* La classe ora pulsa solo il colore del testo, non l'opacità */
-        .live-score {
+                        .live-score {
             font-weight: 800 !important;
             animation: pulseText 1.5s ease-in-out infinite; 
         }
 
         @keyframes pulseText {
-            0%, 100% { color: #0B1D3A; } /* Colore standard del testo in quella riga */
-            50% { color: #ff3b30; }      /* Rosso acceso */
+            0%, 100% { color: #20D489; } /* Diventa identico allo sfondo (scompare) */
+            50% { color: #ff3b30; }      /* Appare in rosso acceso */
         }
+
 
 
 
